@@ -34,3 +34,10 @@ build/
 /eureka-server/.mvn/
 /eureka-server/mvnw
 /eureka-server/mvnw.cmd
+/maple-oss/.mvn/
+/maple-oss/mvnw
+/maple-oss/mvnw.cmd
+/maple-user/.mvn/
+/maple-user/mvnw
+/maple-user/mvnw.cmd
+/application.pid
