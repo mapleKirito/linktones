@@ -19,6 +19,7 @@
         <module>eureka-server</module>
         <module>maple-user</module>
         <module>maple-oss</module>
+        <module>maple-res</module>
     </modules>
 
     <properties>
