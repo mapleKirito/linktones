@@ -40,4 +40,7 @@ build/
 /maple-user/.mvn/
 /maple-user/mvnw
 /maple-user/mvnw.cmd
+/maple-res/.mvn/
+/maple-res/mvnw
+/maple-res/mvnw.cmd
 /application.pid
