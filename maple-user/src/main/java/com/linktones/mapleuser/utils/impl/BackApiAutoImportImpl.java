@@ -23,13 +23,17 @@ package com.linktones.mapleuser.utils.impl;
  *          佛祖保佑             永无BUG
  */
 
+import com.linktones.mapleuser.entity.SysPermation;
 import com.linktones.mapleuser.model.BackApiAnnoDTO;
+import com.linktones.mapleuser.service.ISysPermationService;
 import com.linktones.mapleuser.utils.BackApiAutoImportInter;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +56,10 @@ import java.util.stream.Collectors;
 public class BackApiAutoImportImpl implements BackApiAutoImportInter {
 
     @Autowired
-    
+    private ISysPermationService sysPermationService;
+
+    @Value("${maple.moduleName}")
+    private String moduleName;
 
     /**Spring框架的上下文*/
     private ApplicationContext applicationContext;
@@ -62,6 +69,9 @@ public class BackApiAutoImportImpl implements BackApiAutoImportInter {
     private boolean isOpen;
     /**扫描包名*/
     private String packageName;
+
+    /**权限列表*/
+    private List<SysPermation> permationList=new ArrayList<>();
 
 
 
@@ -164,6 +174,13 @@ public class BackApiAutoImportImpl implements BackApiAutoImportInter {
                                                     .toString();
                                             if (StringUtils.isNotBlank(apiUrl)) {
                                                 log.info("扫描到的接口[{}]：{}",backApiAnnoDTO.getName(),apiUrl);
+                                                //TODO 初始化接口权限
+                                                permationList.add(SysPermation.builder()
+                                                        .permissionModule(moduleName)
+                                                        .permissionUrl(apiUrl)
+                                                        .permissionDesc(backApiAnnoDTO.getNotes())
+                                                        .permissionEnable(1)
+                                                        .build()) ;
                                             }
                                         }
                                     });
@@ -177,6 +194,8 @@ public class BackApiAutoImportImpl implements BackApiAutoImportInter {
                 }
             }
         }
+        //TODO 接口初始化
+        sysPermationService.initPermation(permationList,moduleName);
 
     }
 
@@ -192,6 +211,13 @@ public class BackApiAutoImportImpl implements BackApiAutoImportInter {
         List<BackApiAnnoDTO> backApiAnnoDTOs = new ArrayList<>();
         String name = "";
         List<String> values = new ArrayList<>();
+        String notes="";
+
+        if (method.isAnnotationPresent(ApiOperation.class)) {//判断方法有没有这个注解
+            ApiOperation methodAnno = method.getDeclaredAnnotation(ApiOperation.class);
+            notes = methodAnno.notes();//获取接口描述
+        }
+
         if (method.isAnnotationPresent(RequestMapping.class)) {//判断方法有没有这个注解
             RequestMapping methodAnno = method.getDeclaredAnnotation(RequestMapping.class);
             name = methodAnno.name();//获取方法名
@@ -217,10 +243,22 @@ public class BackApiAutoImportImpl implements BackApiAutoImportInter {
             name = methodAnno.name();
             values = Arrays.asList(methodAnno.value());
         }
+
+        //根据swagger获取更多信息
+        if (method.isAnnotationPresent(ApiOperation.class)) {//判断方法有没有这个注解
+            ApiOperation methodAnno = method.getDeclaredAnnotation(ApiOperation.class);
+            name = methodAnno.value();//如果有则代替接口名称
+            notes = methodAnno.notes();//获取接口描述
+            if(StringUtils.isBlank(notes)){
+                notes=name;//如果没有描述则用名称代替
+            }
+        }
+
         for (String value : values) {//遍历每一个路由,创建详情
             BackApiAnnoDTO backApiAnnoDTO = new BackApiAnnoDTO();
             backApiAnnoDTO.setName(name);
             backApiAnnoDTO.setValue(value);
+            backApiAnnoDTO.setNotes(notes);
             backApiAnnoDTOs.add(backApiAnnoDTO);
         }
         return backApiAnnoDTOs;

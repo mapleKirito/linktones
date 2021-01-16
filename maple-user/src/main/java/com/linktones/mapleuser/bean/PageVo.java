@@ -1,4 +1,4 @@
-package com.linktones.mapleuser.model;
+package com.linktones.mapleuser.bean;
 /***
  *                    _ooOoo_
  *                   o8888888o
@@ -23,16 +23,21 @@ package com.linktones.mapleuser.model;
  *          佛祖保佑             永无BUG
  */
 
+import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @Auther: 那条蠢鱼
- * @Date: 2020/10/28 01:26
- * @Description: # 描述
+ * @Date: 2021/1/17 00:43
+ * @Description: # 分页对象
  */
 @Data
-public class BackApiAnnoDTO {
-    private String name;
-    private String value;
-    private String notes;
+@Builder
+public class PageVo {
+    private int pageNum;
+    private int pageSize;
+    private Long total;
+    private List list;
 }

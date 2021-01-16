@@ -35,10 +35,11 @@ import java.util.List;
  */
 @Data
 @ToString
-public class JsonResult<T> {
+public class JsonResult {
 
-    private T data;
-    private List<T> list;
+    private Object data;
+    private List list;
+    //0表示成功，其余表示异常
     private Integer code;
     private String msg;
 
@@ -61,7 +62,7 @@ public class JsonResult<T> {
      * 有数据返回时，状态码为0，默认提示消息为：操作成功!
      * @param data
      */
-    public JsonResult(T data){
+    public JsonResult(Object data){
         this.data = data;
         this.code = 0;
         this.msg = "操作成功";
@@ -72,7 +73,7 @@ public class JsonResult<T> {
      * @param data
      * @param msg
      */
-    public JsonResult(T data,String msg){
+    public JsonResult(Object data,String msg){
         this.data = data;
         this.msg = msg;
         this.code = 0;
@@ -83,10 +84,26 @@ public class JsonResult<T> {
      * 返回list
      * @param list
      */
-    public void setListSuccess(List<T> list){
-        setCode(0);
-        setMsg("成功");
+    public void setList(List list){
         setList(list);
+    }
+
+    /**
+     * 返回失败
+     * @param msg
+     */
+    public void setFail(String msg){
+        setCode(-1);
+        setMsg(msg);
+    }
+
+    /**
+     * 返回成功
+     * @param msg
+     */
+    public void setSuccess(String msg){
+        setCode(0);
+        setMsg(msg);
     }
 
 }

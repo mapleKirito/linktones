@@ -51,17 +51,17 @@ public class UserController {
     private SysUserMapper sysUserMapper;
 
     @GetMapping(value = "/list",name = "获取用户列表(旧)")
-    @ApiOperation(value = "获取用户列表(旧)",response = SysUser.class)
+    @ApiOperation(value = "获取用户列表(旧)",response = SysUser.class,notes = "获取用户列表,直接返回list对象")
     public List<SysUser> getList(){
 
         return sysUserMapper.selectList(null);
     }
 
     @GetMapping(value = "/list2",name = "获取用户列表")
-    @ApiOperation(value = "获取用户列表",response = JsonResult.class)
-    public JsonResult<SysUser> getList2(){
+    @ApiOperation(value = "获取用户列表",response = JsonResult.class,notes = "获取用户列表，返回Json")
+    public JsonResult getList2(){
 
-        JsonResult<SysUser> jsonResult = new JsonResult<>();
+        JsonResult jsonResult = new JsonResult();
         jsonResult.setList(sysUserMapper.selectList(null));
         return jsonResult;
     }
