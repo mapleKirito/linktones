@@ -24,6 +24,7 @@ package com.linktones.mapleres.utils;
  */
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -36,14 +37,17 @@ import java.util.Arrays;
 @Component
 public class ResUtils {
 
-    private String[] images={"jpg","png"};
-    private String[] videos={"mp4"};
+    @Value("${maple.res.images}")
+    private String[] images;
+
+    @Value("${maple.res.videos}")
+    private String[] videos;
 
     public String getResType(String resPath){
         String s = StringUtils.substringAfterLast(resPath, ".");
-        if(Arrays.asList(images).contains(s)){
+        if(Arrays.asList(images).stream().anyMatch(x -> x.equalsIgnoreCase(s))){
             return "image";
-        }else if(Arrays.asList(videos).contains(s)){
+        }else if(Arrays.asList(videos).stream().anyMatch(x -> x.equalsIgnoreCase(s))){
             return "video";
         }
         return null;
