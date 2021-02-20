@@ -20,6 +20,7 @@
         <module>maple-user</module>
         <module>maple-oss</module>
         <module>maple-res</module>
+        <module>demo-web</module>
     </modules>
 
     <properties>

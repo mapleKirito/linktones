@@ -43,4 +43,7 @@ build/
 /maple-res/.mvn/
 /maple-res/mvnw
 /maple-res/mvnw.cmd
+/demo-web/.mvn/
+/demo-web/mvnw
+/demo-web/mvnw.cmd
 /application.pid
