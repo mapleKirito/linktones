@@ -26,10 +26,7 @@ class MapleResApplicationTests {
     @Test
     public void encrypt() {
 
-        System.out.println("dbUser-PWD: " + stringEncryptor.encrypt("dbUser"));
-        System.out.println("Syswin#123-PWD: " + stringEncryptor.encrypt("Syswin#123"));
-        System.out.println("accessKeyId: " + stringEncryptor.encrypt("LTAI5t7AUDkqheb1P9ifgpdS"));
-        System.out.println("accessKeySecret: " + stringEncryptor.encrypt("sIvNUBTQf6VqJkUcr69ep4FFO5F7sq"));
+
     }
 
 }
