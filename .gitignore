@@ -31,6 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+###module###
 /eureka-server/.mvn/
 /eureka-server/mvnw
 /eureka-server/mvnw.cmd
@@ -46,4 +47,16 @@ build/
 /demo-web/.mvn/
 /demo-web/mvnw
 /demo-web/mvnw.cmd
+/maple-encrypt/.mvn/
+/maple-encrypt/mvnw
+/maple-encrypt/mvnw.cmd
+/auditconfig/.mvn/
+/auditconfig/mvnw
+/auditconfig/mvnw.cmd
+/maple-demo/.mvn/
+/maple-demo/mvnw
+/maple-demo/mvnw.cmd
+/*/.mvn/
+/*/mvnw
+/*/mvnw.cmd
 /application.pid

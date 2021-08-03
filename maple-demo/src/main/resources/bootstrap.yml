@@ -1,0 +1,22 @@
+#eureka
+eureka:
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://112.126.87.213:18080/eureka/
+  instance:
+    prefer-ip-address: true
+
+#feign
+feign:
+  hystrix:
+    enabled: false
+
+#config-center
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      profile: test
