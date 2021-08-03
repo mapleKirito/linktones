@@ -56,8 +56,8 @@ public class SysRoleController {
         return result;
     }
 
-    @PostMapping("list")
-    @ApiOperation(value = "获取列表")
+    @GetMapping(name = "角色列表")
+    @ApiOperation(value = "获取角色列表",response = JsonResult.class,notes = "获取角色列表，返回Json")
     public JsonResult getList(@ApiParam("pageNum页码数,pageSize每页长度,roleName角色名筛选非必填") @RequestBody JSONObject jsonObject){
         if(!jsonUtils.checkParamNull(jsonObject,"pageNum","pageSize")){
             return new JsonResult(-1,"分页参数不正确");

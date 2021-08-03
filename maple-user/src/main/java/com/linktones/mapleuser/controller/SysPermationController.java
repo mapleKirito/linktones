@@ -31,7 +31,7 @@ public class SysPermationController {
     @Autowired
     private JsonUtils jsonUtils;
 
-    @GetMapping("f01")
+    @GetMapping("list")
     @ApiOperation(value = "获取权限列表",response = JsonResult.class)
     public JsonResult getList(){
         JsonResult result=new JsonResult();

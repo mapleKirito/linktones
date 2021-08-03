@@ -37,6 +37,13 @@ import java.util.List;
 @ToString
 public class JsonResult {
 
+    public static JsonResult successList(List list,String msg){
+        JsonResult jsonResult=new JsonResult(0,msg);
+        jsonResult.setList(list);
+        return jsonResult;
+    }
+
+
     private Object data;
     private List list;
     //0表示成功，其余表示异常
@@ -85,7 +92,7 @@ public class JsonResult {
      * @param list
      */
     public void setList(List list){
-        setList(list);
+        this.list=list;
     }
 
     /**

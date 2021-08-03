@@ -1,4 +1,4 @@
-package com.linktones.mapleuser.utils.impl;
+package com.linktones.mapleuser.utils.initTools.impl;
 /***
  *                    _ooOoo_
  *                   o8888888o
@@ -26,7 +26,7 @@ package com.linktones.mapleuser.utils.impl;
 import com.linktones.mapleuser.entity.SysPermation;
 import com.linktones.mapleuser.model.BackApiAnnoDTO;
 import com.linktones.mapleuser.service.ISysPermationService;
-import com.linktones.mapleuser.utils.BackApiAutoImportInter;
+import com.linktones.mapleuser.utils.initTools.BackApiAutoImportInter;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
@@ -194,7 +194,12 @@ public class BackApiAutoImportImpl implements BackApiAutoImportInter {
                 }
             }
         }
-        //TODO 接口初始化
+        //TODO 接口初始化,请求接口/permations/init
+        /**
+        * 报文格式：
+         * moduleName:String
+         * list:SysPermation.class
+        * */
         sysPermationService.initPermation(permationList,moduleName);
 
     }

@@ -40,6 +40,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         this.strictInsertFill(metaObject, "createTime", String.class, getNowTime("yyyy-MM-dd HH:mm:ss")); // 起始版本 3.3.0(推荐使用)
+        this.strictUpdateFill(metaObject, "updateTime", String.class, getNowTime("yyyy-MM-dd HH:mm:ss")); // 起始版本 3.3.0(推荐使用)
     }
 
     @Override

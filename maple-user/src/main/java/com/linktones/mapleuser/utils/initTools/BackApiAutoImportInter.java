@@ -1,4 +1,4 @@
-package com.linktones.mapleuser.utils;
+package com.linktones.mapleuser.utils.initTools;
 /***
  *                    _ooOoo_
  *                   o8888888o

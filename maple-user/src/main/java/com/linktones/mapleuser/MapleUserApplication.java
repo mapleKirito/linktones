@@ -1,10 +1,11 @@
 package com.linktones.mapleuser;
 
-import com.linktones.mapleuser.utils.BackApiAutoImportInter;
+import com.linktones.mapleuser.utils.initTools.BackApiAutoImportInter;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,9 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @EnableOpenApi
 @MapperScan("com.linktones.mapleuser.mapper")
 public class MapleUserApplication implements CommandLineRunner, ApplicationContextAware {
+
+    @Value("${maple.init.permation:true}")
+    private boolean initPermation;
 
     /**
      * 2.获取Spring框架的上下文
@@ -45,15 +49,18 @@ public class MapleUserApplication implements CommandLineRunner, ApplicationConte
     @Override
     public void run(String... args) throws Exception {
         try {
-            if (backApiAutoImportInter != null) {
-                backApiAutoImportInter.setApplicationContext(applicationContext);
-                backApiAutoImportInter.setIsLocal(false);
-                backApiAutoImportInter.setIsOpen(false);
-                backApiAutoImportInter.setScanPackage("com.linktones.mapleuser.controller");
+            log.info("权限初始化:{}",initPermation?"开启":"关闭");
+            if(initPermation){
+                if (backApiAutoImportInter != null) {
+                    backApiAutoImportInter.setApplicationContext(applicationContext);
+                    backApiAutoImportInter.setIsLocal(false);
+                    backApiAutoImportInter.setIsOpen(false);
+                    backApiAutoImportInter.setScanPackage("com.linktones.mapleuser.controller");
 
-                backApiAutoImportInter.run();
-            } else {
-                log.error("backApiAutoImportInter is empty", "backApiAutoImportInter inject failed");
+                    backApiAutoImportInter.run();
+                } else {
+                    log.error("backApiAutoImportInter is empty", "backApiAutoImportInter inject failed");
+                }
             }
         } catch (Exception ex) {
             log.error("error:", ex);
