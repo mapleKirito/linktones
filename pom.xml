@@ -26,6 +26,7 @@
         <module>maple-demo</module>
         <module>config-server</module>
         <module>maple-demo-producer</module>
+        <module>maple-demo-consumer</module>
     </modules>
 
     <properties>

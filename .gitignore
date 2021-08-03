@@ -56,7 +56,10 @@ build/
 /maple-demo/.mvn/
 /maple-demo/mvnw
 /maple-demo/mvnw.cmd
-/*/.mvn/
-/*/mvnw
-/*/mvnw.cmd
+/maple-demo-producer/.mvn/
+/maple-demo-producer/mvnw
+/maple-demo-producer/mvnw.cmd
+/maple-demo-consumer/.mvn/
+/maple-demo-consumer/mvnw
+/maple-demo-consumer/mvnw.cmd
 /application.pid
