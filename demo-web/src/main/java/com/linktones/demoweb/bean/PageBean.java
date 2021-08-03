@@ -1,4 +1,4 @@
-package com.linktones.demoweb.controller;
+package com.linktones.demoweb.bean;
 /***
  *                    _ooOoo_
  *                   o8888888o
@@ -23,29 +23,34 @@ package com.linktones.demoweb.controller;
  *          佛祖保佑             永无BUG
  */
 
-import com.linktones.demoweb.service.DemoInterface;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Data;
+
+import java.util.List;
 
 /**
  * @Auther: 那条蠢鱼
- * @Date: 2021/2/20 09:23
+ * @Date: 2021/5/29 15:41
  * @Description: # 描述
  */
-@RestController
-@RequestMapping("hello")
-public class DemoController {
-    @Autowired
-    private DemoInterface demoInterface;
+@Data
+public class PageBean {
+    /*当前页*/
+    private int current;
+    /*每页条数*/
+    private int size;
+    /*总条数*/
+    private long total;
+    /*内容*/
+    private List aaData;
 
-    @RequestMapping
-    public String hello(){
-        return "hello";
-    }
+    /*兼容运管前端分页*/
+    /*开始条数*/
+    private int iDisplayStart;
+    /*每页条数*/
+    private int iDisplayLength;
+    /*总条数*/
+    private long iTotalRecords;
+    private long iTotalDisplayRecords;
 
-    @RequestMapping("/f1")
-    public String f1(){
-        return demoInterface.demo();
-    }
+
 }

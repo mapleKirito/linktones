@@ -1,4 +1,4 @@
-package com.linktones.demoweb.controller;
+package com.linktones.demoweb.bean;
 /***
  *                    _ooOoo_
  *                   o8888888o
@@ -23,29 +23,29 @@ package com.linktones.demoweb.controller;
  *          佛祖保佑             永无BUG
  */
 
-import com.linktones.demoweb.service.DemoInterface;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 /**
  * @Auther: 那条蠢鱼
- * @Date: 2021/2/20 09:23
- * @Description: # 描述
+ * @Date: 2021/5/29 15:55
+ * @Description: # 返回体枚举
  */
-@RestController
-@RequestMapping("hello")
-public class DemoController {
-    @Autowired
-    private DemoInterface demoInterface;
+public enum Renum {
+    //这里是可以自己定义的，方便与前端交互即可
+    UNKNOWN_ERROR(0,"未知错误"),
+    SUCCESS(1,"成功"),
+    ;
+    private Integer code;
+    private String msg;
 
-    @RequestMapping
-    public String hello(){
-        return "hello";
+    Renum(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 
-    @RequestMapping("/f1")
-    public String f1(){
-        return demoInterface.demo();
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getMsg() {
+        return msg;
     }
 }
